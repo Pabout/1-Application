@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射，namespace命名空间，必须和接口的完整类名，完全一致-->
+<mapper namespace="dao.StudentDao">
+<!--    sql用于声明一个代码字段-->
+    <sql id="field">
+       id,name,age,gender,info
+    </sql>
+<!--select对应查询语句，id唯一的-->
+<!--    include用于导入复用的代码片段-->
+<select id="findAll" resultType="entity.Student">
+    select <include refid="field"/> from student
+</select>
+    <select id="findByKeyword" resultType="entity.Student">
+        select <include refid="field"/> from student
+        where 1 = 1
+        <if test="name != null">
+            and name like #{name}
+        </if>
+        <if test="age != null">
+            and age like #{age}
+        </if>
+    </select>
+    <select id="findByStudentWithTrim" resultType="entity.Student">
+        select <include refid="field"/> from student
+<trim prefix="where" prefixOverrides="and">
+    <if test="id!=null">
+        and id = #{id}
+    </if>
+    <if test="name!=null">
+        and name = #{name}
+    </if>
+    <if test="age!=null">
+        and age = #{age}
+    </if>
+    <if test="gender!=null">
+        and gender = #{gender}
+    </if>
+    <if test="info!=null">
+        and info = #{info}
+    </if>
+</trim>
+    </select>
+    <update id="updateWithTrim">
+        update student
+<trim prefix="set" suffixOverrides=",">
+    <if test="name!=null">
+        name = #{name},
+    </if>
+    <if test="age!=null">
+        age = #{age},
+    </if>
+    <if test="gender!=null">
+        gender = #{gender},
+    </if>
+    <if test="info!=null">
+        info = #{info}
+    </if>
+</trim>
+where id =#{id}
+    </update>
+    <delete id="deleteMore">
+        delete
+        from student
+        where id in
+        <foreach collection="array" open="(" close=")" separator="," item="id" index="i">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

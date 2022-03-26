@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射，namespace命名空间，必须和接口的完整类名，完全一致-->
+<mapper namespace="dao.StudentDao">
+    <resultMap id="findAllMap" type="entity.Student">
+        <id property="id" column="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="gender" property="gender"/>
+        <result column="info" property="info"/>
+        
+        <collection property="subjects" javaType="List" ofType="entity.Subject">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </collection>
+    </resultMap>
+   <select id="findAll" resultMap="findAllMap">
+       select *
+       from student stu
+        inner join student_subject ss
+        on stu.id=ss.stu_id
+        inner join subject sub
+        on sub.id=ss.sub_id
+   </select>
+</mapper>

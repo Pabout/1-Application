@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射，namespace命名空间，必须和接口的完整类名，完全一致-->
+<mapper namespace="dao.StudentDao">
+<!--select对应查询语句，id唯一的-->
+  <select id="findByAge" parameterType="Integer" resultType="entity.Student">
+      select * from student where age =${age}
+  </select>
+    <select id="findById" resultType="entity.Student">
+        select * from student where id =#{id}
+    </select>
+</mapper>
