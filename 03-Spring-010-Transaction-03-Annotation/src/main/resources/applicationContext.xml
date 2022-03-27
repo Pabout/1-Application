@@ -26,7 +26,7 @@
     <bean id="accountService" class="com.fc.service.impl.AccountServiceImpl">
         <property name="accountDao" ref="accountDao"/>
     </bean>
-    <bean id="statementService" class="com.fc.service.impl.StatementServiceImpl">
+        <bean id="annotationService" class="com.fc.service.impl.AnnotationServiceImpl">
         <property name="accountDao" ref="accountDao"/>
     </bean>
 <!--配置平台事务管理器-->
@@ -45,4 +45,7 @@
 <!--        配置事务切面-->
         <aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>
     </aop:config>
+<!--    开始事务注解支持-->
+    <tx:annotation-driven/>
+
 </beans>

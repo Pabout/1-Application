@@ -1,2 +1,4 @@
-package dao;public interface UserDao {
+package dao;
+
+public interface UserDao {
 }

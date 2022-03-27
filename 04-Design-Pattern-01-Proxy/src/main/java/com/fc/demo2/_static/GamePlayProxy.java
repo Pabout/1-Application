@@ -1,4 +1,4 @@
-package com.fc.demo2;
+package com.fc.demo2._static;
 
 //代练,代理
 public class GamePlayProxy implements GamePlay{

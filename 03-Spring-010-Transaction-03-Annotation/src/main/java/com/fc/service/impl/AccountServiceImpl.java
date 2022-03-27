@@ -3,7 +3,7 @@ package com.fc.service.impl;
 import com.fc.dao.AccountDao;
 import com.fc.service.AccountService;
 
-public class AnnotationServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService {
     private AccountDao accountDao;
 
     @Override

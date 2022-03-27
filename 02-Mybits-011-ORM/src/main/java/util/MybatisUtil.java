@@ -9,55 +9,85 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MybatisUtil {
-    //工厂对象
-    private static  SqlSessionFactory FACTORY;
+    // 准备SqlSession工厂对象
+    private static SqlSessionFactory factory;
 
-    //保证线程安全
-    private  static final ThreadLocal<SqlSession> SESSIONS=new ThreadLocal<>();
+    // 创建ThreadLocal绑定当前线程中的SqlSession对象
+    private static final ThreadLocal<SqlSession> threadLocal = new ThreadLocal<>();
 
-    static{
-        //加载资源
+    // 通过静态代码块加载SqlSession工厂对象
+    static {
         try {
-            InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-            FACTORY= new SqlSessionFactoryBuilder().build(inputStream);
+            // 读取配置文件
+            InputStream resource = Resources.getResourceAsStream("mybatis-config.xml");
 
-        } catch (IOException e) {
+            // 获取工厂对象
+            factory = new SqlSessionFactoryBuilder().build(resource);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    //获取sqlsession
-    private static SqlSession openSession(){
-        SqlSession session = SESSIONS.get();
-        if (session!=null){
-            session = FACTORY.openSession();
+
+    // 获得连接（从ThreadLocal中获得当前线程SqlSession）
+    private static SqlSession openSession() {
+        // 从ThreadLocal中获取连接
+        SqlSession sqlSession = threadLocal.get();
+
+        // 如果连接为null
+        if (sqlSession == null) {
+
+            // 从工厂对象中获取连接
+            sqlSession = factory.openSession();
+
+            // 将连接存入ThreadLocal
+            threadLocal.set(sqlSession);
         }
 
-        SESSIONS.set(session);
-        return  session;
+        return sqlSession;
     }
 
-    //关闭连接
-    private static void close(){
-        SqlSession session=SESSIONS.get();;
+    // 释放连接（释放当前线程中的SqlSession）
+    private static void closeSession() {
+        // 从ThreadLocal中获取连接
+        SqlSession sqlSession = threadLocal.get();
 
-        session.close();
+        // 关闭连接
+        sqlSession.close();
 
-        SESSIONS.remove();
+        // 从ThreadLocal中移除连接
+        threadLocal.remove();
     }
-    //获取接口实现类
-    public static <T> T getMapper(Class<T> clazz){
-        SqlSession session=SESSIONS.get();
 
-        return session.getMapper(clazz);
-    }
-    public static void commit(){
+    // 提交事务（提交当前线程中的SqlSession所管理的事务）
+    public static void commit() {
+        // 获取连接
         SqlSession session = openSession();
+
+        // 提交事务
         session.commit();
-        close();
+
+        // 关闭资源
+        closeSession();
     }
-    public static void rollback(){
+
+    // 回滚事务（回滚当前线程中的SqlSession所管理的事务）
+    public static void rollback() {
+        // 获取连接
         SqlSession session = openSession();
+
+        // 回滚事务
         session.rollback();
-        close();
+
+        // 关闭资源
+        closeSession();
+    }
+
+    // 获取接口实现类对象
+    public static <T> T getMapper(Class<T> clazz) {
+        // 获取连接
+        SqlSession session = openSession();
+
+        // 获取接口代理对象
+        return session.getMapper(clazz);
     }
 }

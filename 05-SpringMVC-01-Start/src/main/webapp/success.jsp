@@ -1,16 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: zhang'shi'jie
-  Date: 2022/3/25
-  Time: 10:52
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>成功页</title>
+</head>
+<body>
+<h1 align="center" style="color: deeppink">登陆成功</h1>
+</body>
 </html>

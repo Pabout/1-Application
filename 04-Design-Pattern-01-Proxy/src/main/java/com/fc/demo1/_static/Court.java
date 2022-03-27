@@ -1,4 +1,4 @@
-package com.fc.demo01._static;
+package com.fc.demo1._static;
 
 import org.junit.Test;
 

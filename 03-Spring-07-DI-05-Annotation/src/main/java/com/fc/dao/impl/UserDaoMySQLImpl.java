@@ -2,10 +2,11 @@ package com.fc.dao.impl;
 
 import com.fc.dao.UserDao;
 import com.fc.entity.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository("userDaoMySQLImpl")
 public class UserDaoMySQLImpl implements UserDao {
     @Override
     public List<User> findAll() {

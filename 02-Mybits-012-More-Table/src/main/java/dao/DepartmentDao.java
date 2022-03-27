@@ -1,2 +1,9 @@
-package dao;public interface DepartmentDao {
+package dao;
+
+import entity.Department;
+
+import java.util.List;
+
+public interface DepartmentDao {
+    List<Department> findAll();
 }

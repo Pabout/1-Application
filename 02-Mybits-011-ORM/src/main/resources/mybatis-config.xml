@@ -8,6 +8,7 @@
 
     <settings>
         <setting name="logImpl" value="LOG4J2"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     
     <environments default="development">
@@ -22,6 +23,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper resource="mapper/AccountMapper.xml"/>
     </mappers>
 </configuration>

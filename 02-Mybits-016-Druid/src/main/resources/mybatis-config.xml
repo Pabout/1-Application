@@ -13,19 +13,11 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
 
     </settings>
-    <plugins>
-        <plugin interceptor="com.github.pagehelper.PageInterceptor">
-<!--            数据库方言-->
-            <property name="helperDialect" value="mysql"/>
-<!--            分页数据合理化-->
-            <property name="reasonable" value="true"/>
-        </plugin>
-    </plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="driver" value="${jdbc.driver}"/>
+            <dataSource type="util.DruidDataSourceFactory">
+                <property name="driverClassName" value="${jdbc.driver}"/>
                 <property name="url" value="${jdbc.url}"/>
                 <property name="username" value="${jdbc.username}"/>
                 <property name="password" value="${jdbc.password}"/>

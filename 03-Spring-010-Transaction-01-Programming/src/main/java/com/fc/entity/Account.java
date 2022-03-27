@@ -1,2 +1,7 @@
-package com.fc.entity;public class Account {
+package com.fc.entity;
+
+import lombok.Data;
+
+@Data
+public class Account {
 }

@@ -1,4 +1,4 @@
-package com.fc.demo01._static;
+package com.fc.demo1._static;
 
 //原告被代理的对象
 public class Parties implements Lawsuit{

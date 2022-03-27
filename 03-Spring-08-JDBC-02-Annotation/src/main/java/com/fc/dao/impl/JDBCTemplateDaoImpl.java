@@ -1,12 +1,15 @@
 package com.fc.dao.impl;
 
 import com.fc.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class JDBCTemplateDaoImpl {
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     public int findCount(){
@@ -44,9 +47,5 @@ public class JDBCTemplateDaoImpl {
         List<User> users = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class),id);
         return users.get(0);
 
-    }
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
     }
 }

@@ -9,7 +9,7 @@ public class AccountTest {
     @Test
     public void test(){
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-        AccountService accountService = applicationContext.getBean("programmingService",AccountService.class);
+        AccountService accountService = applicationContext.getBean("statementService",AccountService.class);
         accountService.transfer(1,2,100L);
     }
 }

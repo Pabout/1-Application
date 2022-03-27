@@ -14,6 +14,21 @@ import java.util.List;
 
 public class MybatisTest {
     @Test
+    public void testFindById(){
+        try {
+            InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+            SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
+            SqlSession sqlSession = factory.openSession();
+            StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
+            Student student = studentDao.findById(1);
+            System.out.println(student);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
     public void test(){
         try {
             InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");

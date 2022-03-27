@@ -1,4 +1,4 @@
-package com.fc.demo01._static;
+package com.fc.demo1._static;
 
 //律师，代理
 public class Lawyer implements Lawsuit{

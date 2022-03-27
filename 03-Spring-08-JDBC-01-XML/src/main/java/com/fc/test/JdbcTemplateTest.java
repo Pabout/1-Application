@@ -13,7 +13,7 @@ public class JdbcTemplateTest {
     public void testDelete(){
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
         JDBCTemplateDaoImpl userDao = applicationContext.getBean(JDBCTemplateDaoImpl.class);
-        int affect = userDao.delete(5);
+        userDao.delete(5)
         System.out.println(affect);
     }
     @Test

@@ -5,9 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.fc</groupId>
-  <artifactId>03-Spring-01-ThreeLayerApplication</artifactId>
+  <artifactId>03-Spring-00-ThreeLayerApplication</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>03-Spring-01-ThreeLayerApplication</name>
+  <name>03-Spring-00-ThreeLayerApplication</name>
   <packaging>war</packaging>
 
   <properties>

@@ -1,7 +1,7 @@
-package com.fc.demo2._static;
+package com.fc.demo2._jdk;
 
 //游戏玩家，被代理
-public class GamePlayer implements GamePlay{
+public class GamePlayer implements GamePlay {
     @Override
     public void login() {
         System.out.println("使用冰淇淋登录游戏");

@@ -1,2 +1,5 @@
-package com.fc.dao;public class UserDao {
+package com.fc.dao;
+
+public interface UserDao {
+    void findAll();
 }

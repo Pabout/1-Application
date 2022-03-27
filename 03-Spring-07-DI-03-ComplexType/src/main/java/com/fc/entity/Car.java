@@ -1,2 +1,16 @@
-package com.fc.entity;public class Car {
+package com.fc.entity;
+
+public class Car {
+    private String color;
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "color='" + color + '\'' +
+                '}';
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 }

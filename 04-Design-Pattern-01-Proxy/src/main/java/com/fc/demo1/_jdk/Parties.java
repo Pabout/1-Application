@@ -1,7 +1,7 @@
-package com.fc.demo1._static;
+package com.fc.demo1._jdk;
 
 //原告被代理的对象
-public class Parties implements Lawsuit{
+public class Parties implements Lawsuit {
 
     @Override
     public void submit() {

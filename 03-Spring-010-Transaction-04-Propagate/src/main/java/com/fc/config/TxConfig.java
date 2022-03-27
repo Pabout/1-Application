@@ -2,13 +2,14 @@ package com.fc.config;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.fc.dao.AccountDao;
+import com.fc.dao.LocationDao;
 import com.fc.dao.impl.AccountDaoImpl;
+import com.fc.dao.impl.LocationDaoImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -21,7 +22,7 @@ import java.util.Properties;
 @ComponentScan("com.fc")
 //当前类就是配置类
 @Configuration
-//开启事务管理器
+//开启
 @EnableTransactionManagement
 public class TxConfig {
     @Value("${jdbc.driver}")
@@ -56,13 +57,20 @@ public class TxConfig {
         return dataSource;
     }
     @Bean
-    public TransactionManager transactionManager(DataSource dataSource){
-        return new DataSourceTransactionManager(dataSource);
+    public LocationDao locationDao(DataSource dataSource){
+        LocationDaoImpl locationDao = new LocationDaoImpl();
+        locationDao.setDataSource(dataSource());
+        return locationDao;
+
     }
     @Bean
     public AccountDao accountDao(DataSource dataSource){
         AccountDaoImpl accountDao = new AccountDaoImpl();
         accountDao.setDataSource(dataSource);
         return accountDao;
+    }
+    @Bean
+    public TransactionManager transactionManager(DataSource dataSource){
+        return new DataSourceTransactionManager(dataSource);
     }
 }

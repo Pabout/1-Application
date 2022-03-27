@@ -12,6 +12,6 @@ public class PropagateTest {
     public void test(){
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TxConfig.class);
         AccountService accountService = applicationContext.getBean(AccountService.class);
-        accountService.addAccount("比基尼海滩","经济");
+        accountService.addAccount("比基尼海滩","海绵宝宝");
     }
 }

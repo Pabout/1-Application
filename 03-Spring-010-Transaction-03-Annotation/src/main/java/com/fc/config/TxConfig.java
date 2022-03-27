@@ -1,12 +1,17 @@
 package com.fc.config;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.fc.dao.AccountDao;
+import com.fc.dao.impl.AccountDaoImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -16,6 +21,8 @@ import java.util.Properties;
 @ComponentScan("com.fc")
 //当前类就是配置类
 @Configuration
+//开启事务管理器
+@EnableTransactionManagement
 public class TxConfig {
     @Value("${jdbc.driver}")
     private String driverClassName;
@@ -29,8 +36,7 @@ public class TxConfig {
     // @Bean注解用于将指定方法的返回值作为容器中的对象
     //id就是方法名
     @Bean
-    public JdbcTemplate jdbcTemplate(){
-        JdbcTemplate jdbcTemplate=null;
+    public DataSource dataSource(){
 
         Properties properties = new Properties();
 
@@ -39,16 +45,24 @@ public class TxConfig {
         properties.setProperty("username",username);
         properties.setProperty("password",password);
 
-        DataSource dataSource;
+        DataSource dataSource=null;
 
         try {
             dataSource = DruidDataSourceFactory.createDataSource(properties);
-
-            jdbcTemplate=new JdbcTemplate(dataSource);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return jdbcTemplate;
+        return dataSource;
+    }
+    @Bean
+    public TransactionManager transactionManager(DataSource dataSource){
+        return new DataSourceTransactionManager(dataSource);
+    }
+    @Bean
+    public AccountDao accountDao(DataSource dataSource){
+        AccountDaoImpl accountDao = new AccountDaoImpl();
+        accountDao.setDataSource(dataSource);
+        return accountDao;
     }
 }

@@ -1,10 +1,12 @@
 package dao;
 
+import com.example.vo.PageInfo;
 import entity.Student;
 import org.apache.ibatis.annotations.Param;
 
-public interface StudentDao {
-    Student findById(@Param("id") Integer id);
+import java.util.List;
 
-    int update(Student student);
+public interface StudentDao {
+    List<Student> findAll();
+
 }

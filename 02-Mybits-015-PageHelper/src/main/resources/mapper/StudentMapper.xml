@@ -4,24 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--映射，namespace命名空间，必须和接口的完整类名，完全一致-->
 <mapper namespace="dao.StudentDao">
-<!--    开启二级缓存，当前dao下的所有sql语句都有缓存-->
-<!--    readonly:是否只读-->
-<!--    flushInterval:刷新间隔-->
-<!--    size:缓存的个数-->
-<!--    eviction：回收策略
-FIFO：first in first out:先入先出
-LRU：最近最少使用
-SOFT:软引用
-WEAK:弱引用
-type：自定义缓存策略类型-->
-    <cache />
-<!--    sql用于声明一个代码字段-->
-    <select useCache="false" id="findById" parameterType="Integer" resultType="entity.Student">
+    <select id="findAll" parameterType="Integer" resultType="entity.Student">
         select *
-        from student where id =#{id}
+        from student
     </select>
-<!--    flushCache="false":增删改操作如果配置了这个参数就不会刷新了缓存了-->
-    <update id="update">
-        update student set info=#{info} where id=#{id}
-    </update>
+
 </mapper>

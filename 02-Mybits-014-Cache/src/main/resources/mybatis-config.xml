@@ -7,8 +7,12 @@
     <properties resource="jdbc.properties"/>
 
     <settings>
+<!--        日志-->
         <setting name="logImpl" value="LOG4J2"/>
+<!--        驼峰映射-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
     
     <environments default="development">

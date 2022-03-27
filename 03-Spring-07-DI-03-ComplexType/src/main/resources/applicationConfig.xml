@@ -3,4 +3,42 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="car" class="com.fc.entity.Car">
+        <property name="color" value="pink"/>
+    </bean>
+    <bean id="complexType" class="com.fc.entity.ComplexType">
+        <property name="objects">
+            <array>
+                <value>奥里给</value>
+                <value>true</value>
+                <value>3.1415926</value>
+                <value>高</value>
+                <value>123</value>
+            </array>
+        </property>
+        <property name="list">
+            <array>
+                <value>小洋人</value>
+                <value>可乐</value>
+                <value>雪碧</value>
+                <value>优酸乳</value>
+                <value>热水</value>
+            </array>
+        </property>
+        <property name="set">
+            <array>
+                <value>11</value>
+                <value>22</value>
+                <value>33</value>
+                <value>44</value>
+                <value>55</value>
+            </array>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="person" value="将军"/>
+                <entry key="car" value="car"/>
+            </map>
+        </property>
+    </bean>
 </beans>

@@ -1,5 +1,5 @@
-package com.fc.dao;
+package com.fc.service;
 
-public interface LocationDao {
+public interface LocationService {
     void addLocation(String name);
 }

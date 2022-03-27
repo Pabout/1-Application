@@ -1,4 +1,4 @@
-package com.fc.demo2;
+package com.fc.demo2._static;
 
 //游戏玩家，被代理
 public class GamePlayer implements GamePlay{

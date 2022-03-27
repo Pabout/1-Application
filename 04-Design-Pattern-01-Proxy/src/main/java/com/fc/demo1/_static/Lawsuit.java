@@ -1,4 +1,4 @@
-package com.fc.demo01._static;
+package com.fc.demo1._static;
 
 //接口
 public interface Lawsuit {

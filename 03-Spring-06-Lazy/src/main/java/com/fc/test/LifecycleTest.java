@@ -10,7 +10,6 @@ public class LifecycleTest {
     public void test(){
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationConfig.xml");
     Student student = applicationContext.getBean("student", Student.class);
-    System.out.println(student);
-    ((ClassPathXmlApplicationContext) applicationContext).close();
+    System.out.println();
 }
 }

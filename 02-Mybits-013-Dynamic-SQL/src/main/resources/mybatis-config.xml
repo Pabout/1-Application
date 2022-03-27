@@ -23,6 +23,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mapper/EmployeeMapper.xml"/>
+        <mapper resource="mapper/StudentMapper.xml"/>
     </mappers>
 </configuration>

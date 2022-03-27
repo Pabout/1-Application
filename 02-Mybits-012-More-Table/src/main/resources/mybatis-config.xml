@@ -23,6 +23,9 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mapper/AccountMapper.xml"/>
+        <mapper resource="mapper/EmployeeMapper.xml"/>
+        <mapper resource="mapper/DepartmentMapper.xml"/>
+        <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper resource="mapper/SubjectMapper.xml"/>
     </mappers>
 </configuration>

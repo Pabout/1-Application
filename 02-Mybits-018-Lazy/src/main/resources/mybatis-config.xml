@@ -11,6 +11,10 @@
         <setting name="logImpl" value="LOG4J2"/>
 <!--        驼峰映射-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        开启懒加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+<!--       关闭积极加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
 
     </settings>
     <environments default="development">
@@ -25,6 +29,7 @@
         </environment>
     </environments>
     <mappers>
-        <mapper class="dao.StudentDao"/>
+        <mapper resource="mapper/EmployeeMapper.xml"/>
+        <mapper resource="mapper/DepartmentMapper.xml"/>
     </mappers>
 </configuration>

@@ -1,5 +1,6 @@
 package test;
 
+
 import dao.StudentDao;
 import entity.Student;
 import org.apache.ibatis.io.Resources;
@@ -10,25 +11,60 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class MybatisTest {
-
     @Test
-    public void testinsertOn(){
+    public void testGetIncrement(){
         try {
             InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
             SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
             SqlSession sqlSession = factory.openSession();
             StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
-            Student stu = new Student();
-            stu.setName("七七");
-            stu.setAge((byte)20);
-            stu.setGender("女");
-            stu.setInfo("我叫七七，是个僵尸");
-            int affected=studentDao.insertStudent(stu);
-            System.out.println("受影响的行数"+affected);
+            Student student = new Student();
+            student.setName("十连三金");
+            student.setAge((byte)2);
+            student.setGender("女");
+            student.setInfo("不歪");
+            int affected = studentDao.getIncrement(student);
+            System.out.println("是否成功"+affected);
+            System.out.println("获取自增长的id"+student.getId());
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void findByKeyword(){
+        try {
+            InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+            SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
+            SqlSession sqlSession = factory.openSession();
+            StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
+            List<Student> students = studentDao.findByKeyword("%雷%");
+            for (Student student : students) {
+                System.out.println("受影响的行数"+student);
+            }
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void testFindById(){
+        try {
+            InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+            SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
+            SqlSession sqlSession = factory.openSession();
+            StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
+            Student student = studentDao.findById(29);
+            System.out.println("受影响的行数"+student);
             sqlSession.commit();
             sqlSession.close();
         } catch (IOException e) {
@@ -37,19 +73,16 @@ public class MybatisTest {
     }
 
     @Test
-    public void testinsertssss(){
+    public void testFindAll(){
         try {
             InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
             SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
             SqlSession sqlSession = factory.openSession();
             StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
-            Map<String, Object> map = new HashMap<>();
-            map.put("name","爆炒胡桃");
-            map.put("age","25");
-            map.put("gender","女");
-            map.put("info","往生堂堂主");
-            int affected=studentDao.insert(map);
-            System.out.println("受影响的行数"+affected);
+            List<Student> students = studentDao.findAll();
+            for (Student student : students) {
+                System.out.println(student);
+            }
             sqlSession.commit();
             sqlSession.close();
         } catch (IOException e) {
@@ -58,14 +91,17 @@ public class MybatisTest {
     }
 
     @Test
-    public void testinsert(){
+    public void testUpdate(){
         try {
             InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
             SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
             SqlSession sqlSession = factory.openSession();
             StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
-            int affected=studentDao.insert("神里绫华", 20,"女","大小姐啊啊啊啊");
-            System.out.println("受影响的行数"+affected);
+            Student student = new Student();
+            student.setInfo("人偶");
+            student.setId(24);
+            int affect=studentDao.update(student);
+            System.out.println("受影响的行数"+affect);
             sqlSession.commit();
             sqlSession.close();
         } catch (IOException e) {
@@ -74,31 +110,14 @@ public class MybatisTest {
     }
 
     @Test
-    public void testfindByGender(){
+    public void testDelete(){
         try {
             InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
             SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
             SqlSession sqlSession = factory.openSession();
             StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
-            Student student = studentDao.findByGenderAndName("女", "雷电将军");
-            System.out.println(student);
-            sqlSession.commit();
-            sqlSession.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @Test
-    public void testfind(){
-        try {
-            InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-            SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
-            SqlSession sqlSession = factory.openSession();
-            StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
-            Student student = studentDao.findByIdAndName(26, "雷电真");
-            System.out.println(student);
+            int affect=studentDao.delete(27);
+            System.out.println("受影响的行数"+affect);
             sqlSession.commit();
             sqlSession.close();
         } catch (IOException e) {
@@ -107,18 +126,24 @@ public class MybatisTest {
     }
 
     @Test
-    public void test(){
+    public void testInsert(){
         try {
             InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
             SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
             SqlSession sqlSession = factory.openSession();
             StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
-            Student student = studentDao.findByUsernameAndPassword(26, "雷电真");
-            System.out.println(student);
+            Student student = new Student();
+            student.setName("刻晴");
+            student.setAge((byte)20);
+            student.setGender("女");
+            student.setInfo("玉衡星");
+            int affect = studentDao.insert(student);
+            System.out.println("受影响的行数"+affect);
             sqlSession.commit();
             sqlSession.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

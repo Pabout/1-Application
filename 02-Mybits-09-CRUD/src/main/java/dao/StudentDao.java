@@ -1,21 +1,25 @@
 package dao;
 
+
 import entity.Student;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 public interface StudentDao {
-    Student findByUsernameAndPassword(Integer id,String name);
+    //增
+    int insert(Student student);
+    //删
+    int delete(@Param("id")Integer id);
+    //改
+    int update(Student student);
+    //查询全部
+    List<Student> findAll();
+    //查询单个
+    Student findById(@Param("id") Integer id);
+    //模糊查询
+    List<Student> findByKeyword(@Param("keyword") String keyword);
 
-    Student findByIdAndName(Integer id,String name);
-
-    Student findByGenderAndName(@Param("gender")String gender, @Param("name")String name);
-
-    int insert( @Param("name")String name,@Param("age")Integer age,@Param("gender")String gender,@Param("info")String info);
-
-    int insert(Map<String,Object> map);
-
-    int insertStudent(Student student);
+    //主键回填
+    int getIncrement(Student student);
 }

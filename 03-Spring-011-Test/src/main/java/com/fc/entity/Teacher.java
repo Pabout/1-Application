@@ -1,8 +1,15 @@
 package com.fc.entity;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Teacher {
+    @Value("图图")
     private String name;
+    @Value("3")
     private Integer age;
+    @Value("#{student}")
     private Student student;
 
     @Override

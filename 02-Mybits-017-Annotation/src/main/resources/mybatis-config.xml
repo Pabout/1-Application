@@ -25,6 +25,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper class="dao.StudentDao"/>
     </mappers>
 </configuration>

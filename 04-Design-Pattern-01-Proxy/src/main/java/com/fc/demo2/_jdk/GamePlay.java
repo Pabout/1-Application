@@ -1,4 +1,4 @@
-package com.fc.demo2._static;
+package com.fc.demo2._jdk;
 
 public interface GamePlay {
     //上号

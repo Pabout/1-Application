@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class LifecycleTest {
+public class LazyTest {
 @Test
     public void test(){
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationConfig.xml");
